@@ -1,0 +1,54 @@
+
+
+
+.card {
+  border: none;
+  border-radius: 15px;
+ 
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  
+  margin-bottom: 30px;
+}
+
+
+
+.card-img-top {
+  height: 220px;
+  
+}
+
+
+
+/* 📝 Content Styling */
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0078d4;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+
+.card button {
+  background: linear-gradient(135deg, #0078d4, #00b4d8);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  cursor: pointer;
+ 
+}
+
+
