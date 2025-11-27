@@ -9,11 +9,12 @@ import React, { useEffect, useState } from 'react'
     const [success,setSuccess] = useState('');
     const [mount, setMount] = useState(false);
 
-    useEffect(()=>{
-        let data = JSON.parse(localStorage.getItem("list"));
-        setUserList(data);
-        setMount(true);
-    },[])
+    useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("list")) || [];
+    setUserList(data);
+    setMount(true);
+}, []);
+
 
     useEffect(()=>{
         if(mount){
