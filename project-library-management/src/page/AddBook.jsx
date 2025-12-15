@@ -1,44 +1,62 @@
 import React from "react";
 
-const AddBook = () => {
+const AddBook = ({book,handleChange,handleSubmit}) => {
   return (
     <div className="container">
       <div className="row  justify-content-center mx-auto mt-5 ">
         <div className="col-md-6">
-          <form>
+          <form method="post" onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Email address
+              <label htmlFor="image" className="form-label">
+                 Book Image:
               </label>
               <input
-                type="email"
+                type="url"
                 className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                id="image"
+                name="image"
+                value={book.image || ""}
+                onChange={handleChange}
               />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Password
+              <label htmlFor="title" className="form-label">
+                 Book Title:
               </label>
               <input
-                type="password"
+                type="text"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="title"
+                name="title"
+                value={book.title || ""}
+                onChange={handleChange}
               />
             </div>
-            <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
+             <div className="mb-3">
+              <label htmlFor="author" className="form-label">
+                 Author:
               </label>
+              <input
+                type="text"
+                className="form-control"
+                id="author"
+                name="author"
+                value={book.author || ""}
+                onChange={handleChange}
+              />
+            </div>
+             <div className="mb-3">
+              <label htmlFor="category" className="form-label">
+                 Category:
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="category"
+                name="category"
+                value={book.category || ""}
+                onChange={handleChange}
+              />
             </div>
             <button type="submit" className="btn btn-primary">
               Submit
