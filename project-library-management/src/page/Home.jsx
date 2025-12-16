@@ -28,13 +28,13 @@ const Home = (list) => {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src="..." className="d-block w-100" alt="..." />
+            <img style={{height:'80vh'}}src=" https://static.vecteezy.com/system/resources/thumbnails/045/697/776/small/many-books-on-a-shelf-in-a-library-photo.jpeg"className="d-block w-100 h-80" alt="..." />
           </div>
           <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
+            <img style={{height:'80vh'}}src="https://img.freepik.com/free-vector/flat-twitch-banner-template-world-teacher-s-day-celebration_23-2150736277.jpg?semt=ais_hybrid&w=740&q=80" className="d-block w-100" alt="..." />
           </div>
           <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
+            <img style={{height:'80vh'}} src="https://img.freepik.com/free-photo/old-books-shelf-background-with-never-stop-dreaming-quote_53876-132278.jpg?semt=ais_hybrid&w=740&q=80" className="d-block w-100" alt="..." />
           </div>
         </div>
         <button
