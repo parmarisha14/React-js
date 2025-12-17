@@ -11,6 +11,7 @@ const ViewBook = ({list,handleEdit,handleDelete}) => {
             <th>Sr.No</th>
             <th>Image</th>
             <th>Name</th>
+            <th>Count</th>
             <th>Author</th>
             <th>Category</th>
             <th>Action</th>
@@ -22,7 +23,7 @@ const ViewBook = ({list,handleEdit,handleDelete}) => {
             list.length > 0
             ?
               list.map((value,index)=>{
-                const{image,title,author,category,id}=value;
+                const{image,title,count,author,category,id}=value;
                 return(
                   <tr key={id}>
                     <td>{index+1}</td>
@@ -30,6 +31,7 @@ const ViewBook = ({list,handleEdit,handleDelete}) => {
                       <img  style={{width:'50px',height:'50px',objectFit:'cover'}}src={image} alt={title}/>
                     </td>
                     <td>{title}</td>
+                    <td>{count}</td>
                     <td>{author}</td>
                     <td>{category}</td>
                     <td>

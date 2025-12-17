@@ -6,6 +6,7 @@ const AddBook = ({book,handleChange,handleSubmit}) => {
       <div className="row  justify-content-center mx-auto mt-5 ">
         <div className="col-md-6">
           <form method="post" onSubmit={handleSubmit}>
+            <h2>Add Book</h2>
             <div className="mb-3">
               <label htmlFor="image" className="form-label">
                  Book Image:
@@ -29,6 +30,21 @@ const AddBook = ({book,handleChange,handleSubmit}) => {
                 id="title"
                 name="title"
                 value={book.title || ""}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="count" className="form-label">
+                 Book Count:
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="count"
+                name="count"
+                min={1}
+                max={20}
+                value={book.count || ""}
                 onChange={handleChange}
               />
             </div>
