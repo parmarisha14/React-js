@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": "5d77",
+      "name": "isha",
+      "email": "isha@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "bd34",
+      "name": "sakshi",
+      "email": "sakshi@gmail.com",
+      "password": "abcd"
+    },
+    {
+      "id": "e9c2",
+      "email": "lacysaraby@mailinator.com",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "c077",
+      "email": "myratygy@mailinator.com",
+      "password": "Pa$$w0rd!"
+    }
+  ]
+}
