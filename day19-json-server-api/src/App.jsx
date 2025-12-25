@@ -1,126 +1,151 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 const App = () => {
-  const [user, setUser] = useState({});
-  const [list, setList] = useState([]);
 
- 
-  const getAllUser = async () => {
+  const [user, setUser] = useState({});
+  const [list,setList] = useState([]);
+
+  useEffect(()=>{
+      getAllUsers();
+  },[])
+
+  const getAllUsers = async() => {
     try {
-      let result = await axios.get("http://localhost:3000/users");
-      if (Array.isArray(result.data)) {
-        setList(result.data);
+      let result = await axios.get('http://localhost:3000/users')
+      if(Array.isArray(result.data)){
+        setList(result.data)  
       }
     } catch (error) {
       console.log(error.message);
+      
     }
-  };
+  }
 
-  
-  useEffect(() => {
-    getAllUser();
-  }, []);
+  const handleChange = (e)=>{
+    const {name, value} = e.target;
+    setUser({...user, [name] : value});
+  }
 
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-
- 
-  const createUser = async (data) => {
+  const createUser = async (user) => {
     try {
-      await axios.post("http://localhost:3000/users", data);
-      console.log("User created");
-      getAllUser();
+        await axios.post('http://localhost:3000/users', user)
+        alert('User Create Successfull.')
+        getAllUsers();
     } catch (error) {
-      console.log(error.message);
+      console.log(error.mesage);
+      
     }
-  };
+  }
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(user);
-    setUser({});
-  };
 
+    if(user.id){
+      updateUser(user);
+    }else{
+      createUser(user);
+    }
+    setUser({})
+  }
+
+  const updateUser = async(user) => {
+    try {
+      await axios.patch(`http://localhost:3000/users/${user.id}`, user)
+      alert('User Update Successfully.');
+      getAllUsers();
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  const handleDelete = async(id) => {
+    try {
+      await axios.delete(`http://localhost:3000/users/${id}`)
+      alert('User Deleted Successfully.')
+      getAllUsers();
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+  }
+
+  const handleEdit = (id) => {
+    let data = list.find(val => val.id == id);
+    setUser(data)
+  }
+
+  
+ 
   return (
-    <div className="container mt-4">
-      <div className="row justify-content-center">
+    <div className='container'>
+      <div className="row justify-content-center mt-5">
+        <h2 className='text-center'>Sign Up</h2>
         <div className="col-md-6">
-          <form onSubmit={handleSubmit}>
+          <form action="" method="post" onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                value={user.email || ""}
-                onChange={handleChange}
-              />
+              <label htmlFor="username" className="form-label">Username</label>
+              <input type="text" name="username" value={user.username || ''} onChange={handleChange} id="username" className="form-control" />
             </div>
-
             <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                value={user.password || ""}
-                onChange={handleChange}
-              />
+              <label htmlFor="email" className="form-label">Email</label>
+              <input type="email" name="email" value={user.email || ''} onChange={handleChange} id="email" className="form-control" />
             </div>
-
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input type="password" name="password" value={user.password || ''} onChange={handleChange} id="password" className="form-control" />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>
 
-      <div className="row justify-content-center mt-4">
-        <div className="col-md-8">
-          <table className="table table-bordered">
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-10">
+          <table className='table text-center table-bordered table-striped table-resonsive table-hover caption-top'>
+            <caption>
+              <h2>Users Data</h2>
+            </caption>
+
             <thead>
               <tr>
-                <th>Sr No.</th>
+                <th>Sr.No</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th>Password</th>
                 <th>Action</th>
               </tr>
             </thead>
+
             <tbody>
-              {list.length > 0 ? (
-                list.map((value, index) => (
-                  <tr key={value.id}>
-                    <td>{index + 1}</td>
-                    <td>{value.email}</td>
-                    <td>{value.password}</td>
-                    <td>
-                      <button className="btn btn-danger me-2">
-                        Delete
-                      </button>
-                      <button className="btn btn-warning">
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
+              {
+                list.length > 0 ?
+                list.map((value,index)=>{
+                  const {username,email,password,id} = value;
+                  return(
+                    <tr key={id}>
+                      <td>{index + 1}</td>
+                      <td>{username}</td>
+                      <td>{email}</td>
+                      <td>{password}</td>
+                      <td>
+                        <button type="button" onClick={()=> handleDelete(id)} className="btn btn-outline-danger me-3">Delete</button>
+                        <button type="button" onClick={()=> handleEdit(id)} className="btn btn-outline-warning">Edit</button>
+                      </td>
+                    </tr>
+                  )
+                })
+                :
                 <tr>
-                  <td colSpan="4" className="text-center">
-                    No data found
-                  </td>
+                  <td colSpan={6}>Data Not Found.</td>
                 </tr>
-              )}
+              }
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
